@@ -1,15 +1,20 @@
 name: snappyv310
-version: 3.10.0
-summary: A generic amd64 kernel built from source
-description: This is a generic kernel for amd64 / kvm built using x86_64_defconfig plus the minimal snappy config changes
+version: 3.10.150
+summary: Meerkat Tegra TK1 (r21-5) kernel built from source
+description: This is a kernel built from  the Avionics L4T (r21-5) merged with the patched 3.10 kernel (https://github.com/snapcore/sample-kernels/).
 type: kernel
+architectures: [armhf]
 
 parts:
   kernel:
     plugin: kernel
     source: .
     source-type: git
-    kdefconfig: [x86_64_defconfig, snappy/generic.config, snappy/security.config, snappy/systemd.config, snappy/snappy.config, snappy/containers.config]
+    #kdefconfig: [x86_64_defconfig, snappy/generic.config, snappy/security.config, snappy/systemd.config, snappy/snappy.config, snappy/containers.config]
+    kdefconfig: [tegra12_snappy_defconfig]
     kconfigs:
       - CONFIG_LOCALVERSION="-snappy_v3.10"
-    kernel-image-target: bzImage
+    #kernel-image-target: bzImage
+    kernel-image-target: zImage
+    kernel-device-trees:
+      - tegra124-cleaning-robot
