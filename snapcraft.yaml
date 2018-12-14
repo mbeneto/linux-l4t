@@ -1,0 +1,15 @@
+name: snappyv310
+version: 3.10.0
+summary: A generic amd64 kernel built from source
+description: This is a generic kernel for amd64 / kvm built using x86_64_defconfig plus the minimal snappy config changes
+type: kernel
+
+parts:
+  kernel:
+    plugin: kernel
+    source: .
+    source-type: git
+    kdefconfig: [x86_64_defconfig, snappy/generic.config, snappy/security.config, snappy/systemd.config, snappy/snappy.config, snappy/containers.config]
+    kconfigs:
+      - CONFIG_LOCALVERSION="-snappy_v3.10"
+    kernel-image-target: bzImage
